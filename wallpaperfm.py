@@ -107,7 +107,7 @@ def getParameters():
 
 	try:
 		optlist, args=getopt(sys.argv[1:], 'hu:t:n:c:f:a:o:g:O:i:m:p:s:e:d:r:x:l',["help", "Mode=", "Username=", "Past=", "Filename=","CanvasSize=", "ImageSize=", "FinalOpacity=", "AlbumSize=","AlbumOpacity=","GradientSize=", "Passes=", "AlbumNumber=", "Interspace=","Cache=","Offset=","EndPoint=","ExcludedList=","Local"])
-	except Exception, err:
+	except Exception as err:
 		print "#"*20
 		print str(err)
 		print "#"*20 
