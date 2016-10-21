@@ -29,38 +29,38 @@ import ImageDraw
 import ImageFilter
 
 def usage():
-	print "Quick examples"
-	print "--------------"
-	print "./wallpaperfm.py -m tile -u your_lastfm_username	will generate an image with all your favorite albums tiled up in a random order."
-	print "./wallpaperfm.py -m glass -u your_lastfm_username	will generate an image with a small random collection of albums, with a glassy effect."
-	print "./wallpaperfm.py -m collage -u your_lastfm_username	will generate a random collage of your favorite albums."	
+	print ("Quick examples")
+	print ("--------------")
+	print ("./wallpaperfm.py -m tile -u your_lastfm_username	will generate an image with all your favorite albums tiled up in a random order.")
+	print ("./wallpaperfm.py -m glass -u your_lastfm_username	will generate an image with a small random collection of albums, with a glassy effect.")
+	print ("./wallpaperfm.py -m collage -u your_lastfm_username	will generate a random collage of your favorite albums.")
 	
-	print "\nGlobal switches:"
-	print "-u, --Username: your last.fm username."
-	print "-f, --Filename: the filename where the image will be saved. Username by default."
-	print "-t, --Past: [overall] how far back should the profile go. One of 3month,6month,12month or overall."
-	print "-O, --FinalOpacity: [80] darkness of the final image. from 0 to 100"
-	print "-i, --ImageSize: [1280x1024] size of the final image. Format: numberxnumber"
-	print "-c, --CanvasSize: size of the canvas. = image size by default."
-	print "-e, --Cache: [wpcache] path to the cache."
-	print "-x, --ExcludedList: ['http://cdn.last.fm/depth/catalogue/noimage/cover_med.gif'] excluded urls, comma separated." 
-	print "-l, --Local: use a local copy of the charts. Ideal for using it offline or being kind to the last.fm servers."	
+	print ("\nGlobal switches:")
+	print ("-u, --Username: your last.fm username.")
+	print ("-f, --Filename: the filename where the image will be saved. Username by default.")
+	print ("-t, --Past: [overall] how far back should the profile go. One of 3month,6month,12month or overall.")
+	print ("-O, --FinalOpacity: [80] darkness of the final image. from 0 to 100")
+	print ("-i, --ImageSize: [1280x1024] size of the final image. Format: numberxnumber")
+	print ("-c, --CanvasSize: size of the canvas. = image size by default.")
+	print ("-e, --Cache: [wpcache] path to the cache.")
+	print ("-x, --ExcludedList: ['http://cdn.last.fm/depth/catalogue/noimage/cover_med.gif'] excluded urls, comma separated.")
+	print ("-l, --Local: use a local copy of the charts. Ideal for using it offline or being kind to the last.fm servers.")
 
-	print "\nSpecific switches for the 'tile' mode (-m tile):"
-	print "-a, --AlbumSize: [130] size of the albums, in pixel."
-	print "-s, --Interspace: [5]  space between in tile, in pixel."
+	print ("\nSpecific switches for the 'tile' mode (-m tile):")
+	print ("-a, --AlbumSize: [130] size of the albums, in pixel.")
+	print ("-s, --Interspace: [5]  space between in tile, in pixel.")
 
-	print "\nSpecific switches for the 'glass' mode (-m glass):"
-	print "-n, --AlbumNumber: [7] number of albums to show."
-	print "-d, --EndPoint: [75] controls when the shadow ends, in percentage of the album size."	
-	print "-r, --Offset: [40] starting value of opacity for the shadow."
+	print ("\nSpecific switches for the 'glass' mode (-m glass):")
+	print ("-n, --AlbumNumber: [7] number of albums to show.")
+	print ("-d, --EndPoint: [75] controls when the shadow ends, in percentage of the album size.")
+	print ("-r, --Offset: [40] starting value of opacity for the shadow.")
 
-	print "\nSpecific switches for the 'collage' mode (-m collage):"	
-	print "-a, --AlbumSize: [250] size of the albums, in pixel."
-	print "-o, --AlbumOpacity: [90] maximum opacity of each album, from 0 to 100."
-	print "-n, --AlbumNumber: [50] number of albums to show."
-	print "-g, --GradientSize: [15] portion of the album in the gradient, from 0 to 100"
-	print "-p, --Passes: [4] number of iterations of the algorithms."
+	print ("\nSpecific switches for the 'collage' mode (-m collage):")	 
+	print ("-a, --AlbumSize: [250] size of the albums, in pixel.")
+	print ("-o, --AlbumOpacity: [90] maximum opacity of each album, from 0 to 100.")
+	print ("-n, --AlbumNumber: [50] number of albums to show.")
+	print ("-g, --GradientSize: [15] portion of the album in the gradient, from 0 to 100")
+	print ("-p, --Passes: [4] number of iterations of the algorithms.")
 	sys.exit()
 
 def getSize(s):
