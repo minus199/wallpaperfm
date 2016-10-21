@@ -175,7 +175,7 @@ def getParameters():
 	
 
 		else:
-			print "I'm not using ", option 
+			print ("I'm not using ", option) 
 
 	if Filename=='': # by default, Filename=Username
 		Filename=Profile['Username']
@@ -230,23 +230,23 @@ def getAlbumCovers(Username='Koant',Past='overall',cache='wp_cache',ExcludedList
 	
 	# make cache if doesn't exist
 	if not os.path.exists(cache):
-		print "cache directory ("+cache+") doesn't exist. I'm creating it."	
+		print ("cache directory ("+cache+") doesn't exist. I'm creating it.")
 		os.mkdir(cache)	
 	
 	# Make a local copy of the charts
 	if Local=='no':	
 		try:
-			print "Downloading from ",url
+			print ("Downloading from ",url)
 			download(url,cache+os.sep+'charts_'+Username+'.xml')
 		except Exception as err:
-			print "#"*20
-			print "I couldn't download the profile or make a local copy of it."
-			print "#"*20
+			print ("#"*20)
+			print ("I couldn't download the profile or make a local copy of it.")
+			print ("#"*20)
 	else:
-		print "Reading from local copy:  ",cache+os.sep+'charts_'+Username+'.xml'
+		print ("Reading from local copy:  ",cache+os.sep+'charts_'+Username+'.xml')
 
 	# Parse image filenames
-	print "Parsing..."
+	print ("Parsing...")
 	try:
 		data=open(cache+os.sep+'charts_'+Username+'.xml','rb')
 		xmldoc=minidom.parse(data)
@@ -432,9 +432,9 @@ def Collage(Profile,ImageSize=(1280,1024),CanvasSize=(1280,1024),AlbumNumber=50,
 	
 	background=Image.new('RGB',(imagex,imagey),0) # background
 	mask=makeCollageMask((AlbumSize,AlbumSize),AlbumOpacity,GradientSize)
-	print "Computing the collage..."	
+	print ("Computing the collage...")
 	for p in range(0,Passes):
-		print "Pass ",p+1," of ",Passes	
+		print ("Pass ",p+1," of ",Passes)
 		for imfile in filelist:
 				tmpfile=Image.open(imfile).convert('RGB')
 				tmpfile=tmpfile.resize((AlbumSize,AlbumSize),1)
@@ -450,32 +450,32 @@ def Collage(Profile,ImageSize=(1280,1024),CanvasSize=(1280,1024),AlbumNumber=50,
 ## main
 ########################
 def main():
-	print ""
-	print "	Wallpaperfm.py is a python script that generates desktop wallpapers from your last.fm musical profile."
-	print "	by Koant, http://www.last.fm/user/Koant"
-	print ""
+	print ("")
+	print ("	Wallpaperfm.py is a python script that generates desktop wallpapers from your last.fm musical profile.")
+	print ("	by Koant, http://www.last.fm/user/Koant")
+	print ("")
 	param=getParameters()
 	
-	print "Mode: "+param['Mode']
-	print "	Image will be saved as "+param['Filename']+".jpg"
+	print ("Mode: "+param['Mode'])
+	print ("	Image will be saved as "+param['Filename']+".jpg")
 	if param['Mode']=='tile':
 		for k,v in param['Tile'].iteritems():
-			print "	"+k+": "+str(v)
+			print ("	"+k+": "+str(v))
 		image=Tile(param['Profile'],**param['Tile'])		
 	elif param['Mode']=='glass':
 		for k,v in param['Glass'].iteritems():
-			print "	"+k+": "+str(v)
+			print ("	"+k+": "+str(v))
 		image=Glass(param['Profile'],**param['Glass'])
 	elif param['Mode']=='collage':
 		for k,v in param['Collage'].iteritems():
-			print "	"+k+": "+str(v)
+			print ("	"+k+": "+str(v))
 		image=Collage(param['Profile'],**param['Collage'])
 	else:
 		print (" I don't know this mode: ", param['Mode'])
 		sys.exit()
 
 	image.save(param['Filename']+'.jpg')
-	print "Image saved as "+param['Filename']+'.jpg'
+	print ("Image saved as "+param['Filename']+'.jpg')
 	
 if __name__=="__main__":
 	main()
