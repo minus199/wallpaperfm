@@ -108,9 +108,9 @@ def getParameters():
 	try:
 		optlist, args=getopt(sys.argv[1:], 'hu:t:n:c:f:a:o:g:O:i:m:p:s:e:d:r:x:l',["help", "Mode=", "Username=", "Past=", "Filename=","CanvasSize=", "ImageSize=", "FinalOpacity=", "AlbumSize=","AlbumOpacity=","GradientSize=", "Passes=", "AlbumNumber=", "Interspace=","Cache=","Offset=","EndPoint=","ExcludedList=","Local"])
 	except Exception as err:
-		print "#"*20
-		print str(err)
-		print "#"*20 
+		print ("#"*20)
+		print (str(err))
+		print ("#"*20) 
 		usage()
 	if len(optlist)==0:
 		usage()
@@ -214,7 +214,7 @@ def IsImageFile(imfile):
 	flag=True
 	try:
 		i=Image.open(imfile)
-	except Exception,err:
+	except Exception as err:
 		flag=False
 	return flag
 
@@ -238,7 +238,7 @@ def getAlbumCovers(Username='Koant',Past='overall',cache='wp_cache',ExcludedList
 		try:
 			print "Downloading from ",url
 			download(url,cache+os.sep+'charts_'+Username+'.xml')
-		except Exception,err:
+		except Exception as err:
 			print "#"*20
 			print "I couldn't download the profile or make a local copy of it."
 			print "#"*20
@@ -251,10 +251,10 @@ def getAlbumCovers(Username='Koant',Past='overall',cache='wp_cache',ExcludedList
 		data=open(cache+os.sep+'charts_'+Username+'.xml','rb')
 		xmldoc=minidom.parse(data)
 		data.close()
-	except Exception,err:
-		print '#'*20
-		print "Error while parsing your profile. Your username might be misspelt or your charts empty."
-		print '#'*20		
+	except Exception as err:
+		print ('#'*20)
+		print ("Error while parsing your profile. Your username might be misspelt or your charts empty.")
+		print ('#'*20)
 		sys.exit()
 
 	filelist=[imfile.firstChild.data for imfile in xmldoc.getElementsByTagName('large')]
@@ -266,9 +266,9 @@ def getAlbumCovers(Username='Koant',Past='overall',cache='wp_cache',ExcludedList
 
 	# Stop if charts are empty
 	if len(filelist)==0:
-		print '#'*20
-		print "Your charts are empty. I can't proceed."
-		print '#'*20
+		print ('#'*20)
+		print ("Your charts are empty. I can't proceed.")
+		print ('#'*20)
 		sys.exit()
 
 	# download covers only if not available in the cache
@@ -276,7 +276,7 @@ def getAlbumCovers(Username='Koant',Past='overall',cache='wp_cache',ExcludedList
 		url=imfile
 		imfile=makeFilename(imfile)	
 		if not os.path.exists(cache+os.sep+imfile):
-			print "	Downloading ",url
+			print ("Downloading ",url)
 			download(url,cache+os.sep+imfile)
 
 	filelist=[cache+os.sep+makeFilename(imfile) for imfile in filelist] 
@@ -321,12 +321,12 @@ def Tile(Profile,ImageSize=(1280,1024),CanvasSize=(1280,1024),AlbumSize=130,Fina
 			imfile=filelist2.pop()
 			try:
 				im=Image.open(imfile).convert('RGB')
-			except Exception,err:
-				print "#"*20
-				print err
-				print "I couln't read that file: "+imfile
-				print "You might want to exclude its corresponding URL with -x because it probably doesn't point to an image."
-				print "#"*20				
+			except Exception as err:
+				print ("#"*20)
+				print (err)
+				print ("I couln't read that file: "+imfile)
+				print ("You might want to exclude its corresponding URL with -x because it probably doesn't point to an image.")
+				print ("#"*20)
 				sys.exit()
 			im=im.resize((AlbumSize,AlbumSize),2)		
 			background.paste(im,(posx+offsetx,posy+offsety))		
@@ -471,7 +471,7 @@ def main():
 			print "	"+k+": "+str(v)
 		image=Collage(param['Profile'],**param['Collage'])
 	else:
-		print " I don't know this mode: ", param['Mode']
+		print (" I don't know this mode: ", param['Mode'])
 		sys.exit()
 
 	image.save(param['Filename']+'.jpg')
